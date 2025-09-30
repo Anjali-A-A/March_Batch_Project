@@ -60,7 +60,7 @@
                                 <br>
                                 Price: ${{cart_item.product.price}}
                                 <br>
-                                Quantity: {{cart_item.quantity}} X ${{cart_item}}
+                                Quantity: {{cart_item.quantity}} X ${{cart_item.product.price}}
 
                             </td>
                             <td>
@@ -71,12 +71,48 @@
                                 <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="custom_icon">
                                     <i class="fa-solid fa-plus custom_icon"></i>
                                 </a> &nbsp;
-                                <a href="" class="custom_a"><i class="fa-solid fa-trash"></i></a>
+                
                             </td>
                             {% else %}
+                            <td>
+                                <a href="{% url 'cart:remove_cart' cart_item.product.id %}" class="custom_icon">
+                                    <i class="fa-solid fa-minus"></i>
+                                </a> &nbsp;
+                            </td>
+                            <td>
+                                <a href="{% url 'cart:remove_cart' cart_item.product.id %}" class="custom_icon">
+                                    <i class="fa-solid fa-trash"></i></a>
+                                &nbsp;
+                            </td>    
+                            {% endif %}
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
+                {% endif %}
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+                    <table class="table my_custom_table">
+                        <thead class="my_custom_thead">
+                            <tr>
+                                <th>
+                                    Checkout
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Please review your shopping cart items before proceeding with the order payment.
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div class="mx-auto">
+                        <a class="btn btn-secondary btn-block my_custom_button" href="{% url 'shop:allProdCat' %}">Continue Shopping</a>
+                    </div>
+                </div>
           </div>  
         </div>
     </div>
+{% endblock %}

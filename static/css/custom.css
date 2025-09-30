@@ -103,3 +103,16 @@ body{
     letter-spacing: .2em;
     background-color: #f8f8fa! important;
 }
+
+.custom_a{
+    text-decoration: none;
+}
+
+.custom_icon{
+    text-decoration: none;
+    color: #868e96 !important;
+}
+
+.my_custom_button{
+    margin-top: 5px;
+}
