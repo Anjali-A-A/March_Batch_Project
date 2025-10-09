@@ -11,7 +11,9 @@ def counter(request):
             cart_items = CartItem.objects.all().filter(cart=cart[:1])
             for cart_item in cart_items:
                 item_count += cart_item.quantity
+            # item_count = sum(item.quantity for item in cart_items)
         except Cart.DoesNotExist:
-            item_count=0
-    return dict(item_count=item_count)
+            item_count = 0
+    # return dict(item_count=item_count)
+    return {'item_count': item_count}
 

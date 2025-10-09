@@ -3,8 +3,31 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from django.contrib import messages
 from django.urls import reverse
+# from django.contrib.auth.models import User
 
 # Create your views here.
+# def register(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         email = request.POST.get('email')
+#         password = request.POST.get('password1')
+#         confirm_password = request.POST.get('confirm_password')
+#         if password != confirm_password:
+#             messages.error(request, 'Passwords do not match.')
+#             return redirect('accounts:register')
+#         if User.objects.filter(username=username).exists():
+#             messages.error(request, 'Username already exists.')
+#             return redirect('accounts:register')
+#         if User.objects.filter(email=email).exists():
+#             messages.error(request, 'Email already exists.')
+#             return redirect('accounts:register')
+#         user = User.objects.create_user(username=username, email=email, password=password)
+#         user.save()
+#         messages.success(request, 'Registration successful. Please log in.')
+#         return redirect('accounts:login')
+#     return render(request, 'register.html')
+        
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
