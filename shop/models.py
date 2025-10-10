@@ -7,6 +7,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=250, unique=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='category', blank=True)
+    discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     class Meta:
         ordering = ('name',)
         verbose_name = 'category'
@@ -27,6 +28,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     class Meta:
         ordering = ('name',)
         verbose_name = 'product'
@@ -36,3 +38,11 @@ class Product(models.Model):
     
     def get_url(self):
         return reverse('shop:proDetail', args=[self.category.slug, self.slug])
+    
+    def get_final_price(self):
+        applicable_discount = max(self.discount_percentage, self.category.discount_percentage)
+        discounted_price = self.price - (self.price * (applicable_discount / 100))
+        return round(discounted_price, 2)
+    
+    def get_discount_percentage(self):
+        return max(self.discount_percentage, self.category.discount_percentage)

@@ -34,11 +34,14 @@
         <!-- <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li> -->
-       {% if counter > 0 %}
+       
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i>({{counter}})</a>
+          <a class="nav-link" href="{% url 'cart:cart_detail' %}"><i class="fa-solid fa-cart-shopping"></i>{% if counter > 0 %}
+          ({{counter}})
+        {% endif %}</a>
+        
         </li>
-        {% endif %}
+        
       </ul>
       <form class="d-flex" role="search"  action="{% url 'search_app:searchResult' %}" method="get">
         

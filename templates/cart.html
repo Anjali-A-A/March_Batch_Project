@@ -59,9 +59,16 @@
                                 <br>
                                 ID: {{cart_item.product.id}}
                                 <br>
-                                Price: ${{cart_item.product.price}}
+                                <!-- Price: ${{cart_item.product.price}} -->
+                                 {% if cart_item.product.get_discount_percentage > 0 %}
+                        <strong><p style="color: crimson;">Discount: {{cart_item.product.get_discount_percentage}}%</p></strong>
+
+                                 Price: $ <strike>{{cart_item.product.price}}</strike> {{cart_item.product.get_final_price}}
+                                {% else %}
+                                    Price: ${{cart_item.product.price}}
+                                    {% endif %}
                                 <br>
-                                Quantity: {{cart_item.quantity}} X ${{cart_item.product.price}}
+                                Quantity: {{cart_item.quantity}} X ${{cart_item.product.get_final_price}}
 
                             </td>
                             <td>
